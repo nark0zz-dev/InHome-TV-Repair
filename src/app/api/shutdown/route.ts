@@ -59,16 +59,28 @@ function attemptShutdown(reason = 'Triggered via /api/shutdown') {
   }, 300);
 }
 
+interface ShutdownRequestBody {  
+  password: string;  
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json().catch(() => ({} as any));
-    const { password } = body || {};
+    // Parse request body with typed handling and robust checks
+    let body: ShutdownRequestBody | null = null;
+    try {
+      const parsed = await request.json();
+      if (parsed && typeof parsed === 'object' && 'password' in parsed && typeof parsed.password === 'string') {
+        body = { password: parsed.password };
+      }
+    } catch (e) {
+      // ignore parse errors and keep body as null
+    }
 
-    if (!password) {
+    if (!body || !body.password) {
       return NextResponse.json({ error: 'Password required' }, { status: 400 });
     }
 
-    if (password !== SHUTDOWN_PASSWORD) {
+    if (body.password !== SHUTDOWN_PASSWORD) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
     }
 
@@ -76,9 +88,9 @@ export async function POST(request: NextRequest) {
 
     // send response immediately
     const res = NextResponse.json(
-      {
-        message: 'Server shutdown initiated',
-        timestamp: new Date().toISOString(),
+      {  
+        message: 'Server shutdown initiated',  
+        timestamp: new Date().toISOString(),  
       },
       { status: 200 }
     );

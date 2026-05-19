@@ -106,7 +106,7 @@ export default function AboutPage() {
                 <div className="text-slate-600 font-medium">First-Time Fix Rate</div>
               </div>
               <div className="bg-slate-50 rounded-2xl p-8 text-center border border-slate-100">
-                <div className="text-4xl font-black text-primary mb-2">4.9★</div>
+                <div className="text-4xl font-black text-primary mb-2">5★</div>
                 <div className="text-slate-600 font-medium">Google Rating</div>
               </div>
             </div>

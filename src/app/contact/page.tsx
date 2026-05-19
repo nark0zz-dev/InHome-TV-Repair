@@ -12,7 +12,7 @@ export default function ContactPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-white to-white py-16 md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-secondary via-white to-white pt-16 md:pt-24">
         <div className="w-full px-4 max-w-7xl mx-auto sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
@@ -27,7 +27,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="pt-16 md:pt-24 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="w-full px-4 max-w-4xl mx-auto sm:px-6">
           <ContactForm 
             serviceType="General Contact Form Submission"

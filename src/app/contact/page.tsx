@@ -26,6 +26,17 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Contact Form Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="w-full px-4 max-w-4xl mx-auto sm:px-6">
+          <ContactForm 
+            serviceType="General Contact Form Submission"
+            heading="Request a Free Quote"
+            subheading="Fill out the form below and we'll call you back within 30 minutes to discuss your TV repair needs."
+          />
+        </div>
+      </section>
+
       {/* Contact Info Section */}
       <section className="py-16 md:py-24 bg-slate-50">
         <div className="w-full px-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -73,16 +84,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="w-full px-4 max-w-4xl mx-auto sm:px-6">
-          <ContactForm 
-            serviceType="General Contact Form Submission"
-            heading="Request a Free Quote"
-            subheading="Fill out the form below and we'll call you back within 30 minutes to discuss your TV repair needs."
-          />
-        </div>
-      </section>
 
       {/* Business Hours Section */}
       <section className="py-16 md:py-24 bg-slate-50">

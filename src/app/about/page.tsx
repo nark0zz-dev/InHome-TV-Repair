@@ -119,7 +119,7 @@ export default function AboutPage() {
         <div className="w-full px-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">
-              The inHome Difference
+              Our Difference
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
               What sets us apart from other TV repair services in Charlotte.

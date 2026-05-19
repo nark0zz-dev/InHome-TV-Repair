@@ -130,6 +130,9 @@ export default function ContactForm({
               <a href="tel:+19809870005" className="text-2xl font-black mt-1 block">
                 (980) 987-0005
               </a>
+              <a href="mailto:slavat0005@gmail.com" className="text-sm mt-2 block hover:text-primary transition-colors">
+                slavat0005@gmail.com
+              </a>
             </div>
           </div>
         )}

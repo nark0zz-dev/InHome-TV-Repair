@@ -1,6 +1,6 @@
 'use client';
 
-import { PhoneIcon, ClockIcon, BoltIcon } from '@heroicons/react/24/solid';
+import { PhoneIcon, ClockIcon, BoltIcon, EnvelopeIcon } from '@heroicons/react/24/solid';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
@@ -29,7 +29,7 @@ export default function ContactPage() {
       {/* Contact Info Section */}
       <section className="py-16 md:py-24 bg-slate-50">
         <div className="w-full px-4 max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             <div className="bg-white rounded-2xl p-8 shadow-sm text-center border border-slate-100">
               <div className="bg-secondary/50 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary">
                 <PhoneIcon className="w-8 h-8" />
@@ -57,6 +57,17 @@ export default function ContactPage() {
               <h3 className="text-xl font-bold text-slate-800 mb-2">Emergency Service</h3>
               <div className="text-2xl font-black text-primary mb-2">Available</div>
               <p className="text-sm text-slate-500">For urgent repairs</p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-sm text-center border border-slate-100">
+              <div className="bg-secondary/50 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4 text-primary">
+                <EnvelopeIcon className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">Email Us</h3>
+              <a href="mailto:slavat0005@gmail.com" className="text-2xl font-black text-primary hover:text-primary-dark transition-colors break-all">
+                slavat0005@gmail.com
+              </a>
+              <p className="text-sm text-slate-500 mt-2">We reply within hours</p>
             </div>
           </div>
         </div>

@@ -27,7 +27,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:pt-24 bg-white">
         <div className="w-full px-4 max-w-4xl mx-auto sm:px-6">
           <ContactForm 
             serviceType="General Contact Form Submission"

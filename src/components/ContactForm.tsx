@@ -136,7 +136,6 @@ export default function ContactForm({
 
         {/* Form Side */}
         <div className={`p-8 md:p-12 ${showInfoPanel ? 'md:w-3/5' : 'w-full'}`}>
-  +++++++ REPLACE
           <div className="text-center md:text-left mb-8">
             <h2 className="text-2xl md:text-3xl font-black text-slate-800 mb-2">
               {heading}

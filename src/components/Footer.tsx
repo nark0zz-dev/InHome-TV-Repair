@@ -45,15 +45,15 @@ export default function Footer() {
 
           {/* Hours */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-slate-200 uppercase tracking-wide">Hours</h3>
+          <h3 className="text-lg font-bold mb-6 text-slate-200 uppercase tracking-wide">Hours</h3>
             <ul className="space-y-4 text-slate-400">
               <li className="flex items-center space-x-3">
                 <ClockIcon className="w-5 h-5 text-primary" />
-                <span>Mon-Sat: 8am - 9pm</span>
+                <span>Mon-Sun: 8am - 9pm</span>
               </li>
               <li className="flex items-center space-x-3">
                 <BoltIcon className="w-5 h-5 text-primary" />
-                <span>Emergency Svc Available</span>
+                <span>Emergency Service Available</span>
               </li>
             </ul>
           </div>

@@ -49,7 +49,7 @@ export default function ContactPage() {
               <a href="tel:+19809870005" className="text-2xl font-black text-primary hover:text-primary-dark transition-colors">
                 (980) 987-0005
               </a>
-              <p className="text-sm text-slate-500 mt-2">Available Mon-Sat, 8am-9pm</p>
+              <p className="text-sm text-slate-500 mt-2">Available Mon-Sun, 8am-9pm</p>
             </div>
 
             <div className="bg-white rounded-2xl p-8 shadow-sm text-center border border-slate-100">
@@ -102,7 +102,7 @@ export default function ContactPage() {
               </div>
               <div className="flex items-center justify-between py-4 border-b border-slate-100">
                 <span className="font-bold text-slate-700">Sunday</span>
-                <span className="text-slate-600">Closed</span>
+                <span className="text-slate-600">8:00 AM - 9:00 PM</span>
               </div>
               <div className="flex items-center justify-between py-4 border-b border-slate-100">
                 <span className="font-bold text-slate-700">Emergency Service</span>

@@ -11,8 +11,9 @@ Professional in-home TV repair and installation services in Charlotte, NC. **We 
 ## 🎯 Features
 
 - ✅ **In-Home Service** - We come to you!
+- ✅ **$25 Online Diagnostic** - Remote photo/video assessment via Stripe + Telegram
 - ✅ **Single-page Landing** - Fast & focused
-- ✅ **Telegram Bot Integration** - Instant notifications
+- ✅ **Telegram Bot Integration** - Instant notifications + inline verdict buttons
 - ✅ **US Phone Mask** - Auto-formats (XXX) XXX-XXXX
 - ✅ **Mobile-First Design** - Optimized for all devices
 - ✅ **SEO Optimized** - Google Business ready
@@ -191,6 +192,9 @@ npm start            # Start production server
 # Utilities
 npm run lint         # Check code quality
 npm run type-check   # TypeScript validation
+
+# Database (run once after provisioning Postgres)
+psql "$DATABASE_URL" -f scripts/create-diagnostic-tables.sql
 ```
 
 ---
@@ -202,34 +206,117 @@ TV_REPAIR/
 ├── src/
 │   ├── app/
 │   │   ├── api/
-│   │   │   └── tv-repair-callback/    # Telegram API endpoint
-│   │   ├── layout.tsx                  # SEO & metadata
-│   │   ├── page.tsx                    # Landing page
-│   │   ├── not-found.tsx               # 404 page
-│   │   ├── sitemap.ts                  # SEO sitemap
-│   │   └── robots.ts                   # Crawler rules
+│   │   │   ├── tv-repair-callback/      # Callback request → Telegram
+│   │   │   ├── online-diagnostic/       # $25 diagnostic form → S3 + DB + Stripe
+│   │   │   ├── stripe-webhook/          # Stripe checkout.session.completed
+│   │   │   ├── telegram-webhook/        # Telegram updates + diagnostic callbacks
+│   │   │   ├── health/                  # Health check
+│   │   │   └── shutdown/                # Shutdown hook
+│   │   ├── online-diagnostic/           # $25 online diagnostic page
+│   │   │   └── success/                 # Post-payment success page
+│   │   ├── layout.tsx                   # SEO & metadata
+│   │   ├── page.tsx                     # Landing page
+│   │   ├── not-found.tsx                # 404 page
+│   │   ├── sitemap.ts                   # SEO sitemap
+│   │   └── robots.ts                    # Crawler rules
+│   ├── components/
+│   │   ├── DiagnosticForm.tsx           # $25 diagnostic form + Stripe embedded checkout
+│   │   ├── OnlineDiagnosticCallout.tsx  # Landing-page callout section
+│   │   ├── ContactForm.tsx              # Callback request form
+│   │   ├── Header.tsx / Footer.tsx      # Layout
+│   │   └── ServiceAreas.tsx             # Service areas
 │   ├── lib/
-│   │   └── telegram-bot.ts             # Bot integration
-│   ├── middleware.ts                   # Security headers
+│   │   ├── telegram-bot.ts              # Bot integration (commands)
+│   │   ├── diagnostic-bot.ts            # Diagnostic notifications + inline keyboards
+│   │   ├── db.ts                        # Postgres (pg) — diagnostic_orders
+│   │   ├── s3.ts                        # Railway S3 — media uploads + presigned URLs
+│   │   ├── stripe.ts                    # Stripe embedded checkout sessions
+│   │   └── resend.ts                    # Transactional email (confirmation + verdict)
+│   ├── types/
+│   │   └── diagnostic.ts                # Shared types + constants
+│   ├── middleware.ts                    # Security headers
 │   └── providers/
-│       └── QueryProvider.tsx           # React Query
+│       └── QueryProvider.tsx            # React Query
+├── scripts/
+│   └── create-diagnostic-tables.sql     # DB migration for diagnostic_orders
 ├── public/
 │   └── services/
-│       └── tv-repair.webp              # Hero image
-├── .env.local                          # Your credentials (create this)
-└── README.md                           # This file
+│       └── tv-repair.webp               # Hero image
+├── .env.example                         # All env vars documented (copy to .env.local)
+├── .env.local                           # Your credentials (create this)
+└── README.md                            # This file
 ```
 
 ---
 
-## 🔧 Configuration
+## � $25 Online Diagnostic Service
+
+A low-friction remote diagnostic: customers upload photos/video of their TV issue,
+pay $25 via Stripe, and get an expert verdict within 2 hours. The $25 is credited
+toward a full repair if they book an in-home visit. Admins manage verdicts via
+Telegram inline keyboard buttons.
+
+### Architecture
+
+| Layer      | Technology                                          |
+|------------|-----------------------------------------------------|
+| Payment    | Stripe Embedded Checkout (iframe on `/online-diagnostic`) |
+| Storage    | Railway S3-compatible bucket (presigned URLs)       |
+| Database   | Postgres on Railway (`diagnostic_orders` table)     |
+| Email      | Resend (customer confirmation + verdict delivery)   |
+| Admin UX   | Telegram inline keyboard buttons (Repairable / Unfixable / Need more photos / Book in-home) |
+
+### Workflow
+
+1. Customer fills the form on `/online-diagnostic` (name, phone, email, TV brand/model, issue, media).
+2. On submit → media uploaded to S3 → order created in DB (`pending_payment`) → Stripe Embedded Checkout session created → checkout iframe mounts.
+3. Customer pays $25 → Stripe webhook `checkout.session.completed` fires → order marked `paid` → admin gets a rich Telegram notification with media links + inline verdict buttons → customer gets a confirmation email.
+4. Admin taps a verdict button in Telegram → `callback_query` → DB status updated → customer emailed the verdict → Telegram message edited to reflect the verdict.
+
+### Setup
+
+1. **Copy env vars:** `cp .env.example .env.local` and fill in all values.
+2. **Provision Postgres on Railway** and set `DATABASE_URL`.
+3. **Run the migration:**
+   ```bash
+   psql "$DATABASE_URL" -f scripts/create-diagnostic-tables.sql
+   ```
+   (Or paste `scripts/create-diagnostic-tables.sql` into Railway's Postgres Query tab.)
+4. **Create a Railway S3 bucket** and set the `S3_*` vars.
+5. **Stripe:** create a webhook endpoint in the Stripe dashboard pointing to `https://yourdomain.com/api/stripe-webhook` for the `checkout.session.completed` event. Copy the signing secret to `STRIPE_WEBHOOK_SECRET`.
+6. **Resend:** verify your sending domain and set `RESEND_API_KEY` + `EMAIL_FROM`.
+7. **Telegram webhook:** (already set up for the existing bot) ensure it points to `https://yourdomain.com/api/telegram-webhook`.
+
+### Telegram Bot — Diagnostic Commands
+
+When a paid diagnostic order comes in, the admin chat receives a message with:
+- Customer name, phone, email, TV brand/model, issue description
+- Clickable presigned links to each uploaded photo/video
+- Inline buttons: **✅ Repairable** · **❌ Unfixable (cracked)** · **📸 Need more photos** · **🏠 Book in-home visit**
+
+Tapping a button records the verdict, emails the customer automatically, and updates the message.
+
+---
+
+## �🔧 Configuration
 
 ### Environment Variables
+
+See `.env.example` for the full list with descriptions. Summary:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `TELEGRAM_BOT_TOKEN` | Bot token from @BotFather | Yes |
-| `TELEGRAM_CHAT_ID` | Group chat ID for notifications | Yes |
+| `TELEGRAM_CHAT_ID` | Group chat ID for callback pings | Yes |
+| `TELEGRAM_DIAGNOSTIC_ADMIN_ID` | Admin's personal Telegram user ID (DMs for diagnostic details) | For diagnostics |
+| `STRIPE_SECRET_KEY` | Stripe server secret key | For diagnostics |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key (browser) | For diagnostics |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret | For diagnostics |
+| `PUBLIC_BASE_URL` | Public site URL (Stripe return_url) | For diagnostics |
+| `DATABASE_URL` | Postgres connection string (Railway) | For diagnostics |
+| `S3_ENDPOINT` / `S3_REGION` / `S3_ACCESS_KEY_ID` / `S3_SECRET_ACCESS_KEY` / `S3_BUCKET_NAME` | Railway S3 bucket credentials | For diagnostics |
+| `RESEND_API_KEY` | Resend API key | For diagnostics |
+| `EMAIL_FROM` | Verified sender address | For diagnostics |
 
 ### Business Information
 
@@ -295,6 +382,19 @@ In Telegram group:
 - Check header compactness
 - Test form inputs (number keyboard should appear)
 - Verify touch targets are adequate
+
+### ⚠️ Before Going to Production
+- [ ] **Drop test orders from the DB** (created during local testing):
+  ```sql
+  DELETE FROM diagnostic_orders;
+  ```
+- [ ] Switch Stripe keys from test (`sk_test_...`/`pk_test_...`) to live (`sk_live_...`/`pk_live_...`)
+- [ ] Update the Stripe webhook endpoint in the Stripe dashboard to the production URL
+- [ ] Set `DATABASE_URL` to the Railway internal Postgres URL (`postgres.railway.internal`)
+- [ ] Set `PUBLIC_BASE_URL` to the production domain (`https://inhometvrepair.com`)
+- [ ] Run `npm run telegram:webhook:set` to point the Telegram webhook at production
+- [ ] Set `NODE_ENV=production`
+- [ ] Verify Resend is configured (`RESEND_API_KEY` + `EMAIL_FROM` on a verified domain)
 
 ---
 

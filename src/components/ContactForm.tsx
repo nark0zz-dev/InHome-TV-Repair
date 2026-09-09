@@ -23,6 +23,7 @@ export default function ContactForm({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
   const formatPhoneNumber = (value: string) => {
     let phoneNumber = value.replace(/\D/g, '');
@@ -59,6 +60,14 @@ export default function ContactForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const phoneDigits = formData.phone.replace(/\D/g, '');
+    if (phoneDigits.length !== 10) {
+      setPhoneError('Please enter a complete 10-digit phone number.');
+      return;
+    }
+    setPhoneError('');
+
     setIsSubmitting(true);
     setSubmitMessage('');
 
@@ -185,6 +194,9 @@ export default function ContactForm({
                 autoComplete="tel"
                 inputMode="numeric"
               />
+              {phoneError && (
+                <p className="text-red-600 text-sm font-medium mt-2">{phoneError}</p>
+              )}
             </div>
 
             {/* Screen Repair Warning */}

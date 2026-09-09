@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
+import OnlineDiagnosticCallout from '@/components/OnlineDiagnosticCallout';
 
 export default function TVPowerRepairPage() {
   const symptoms = [
@@ -231,6 +232,9 @@ export default function TVPowerRepairPage() {
           </div>
         </div>
       </section>
+
+      {/* $25 Online Diagnostic Callout */}
+      <OnlineDiagnosticCallout />
 
       {/* Contact Section */}
       <section className="py-16 md:py-24 bg-gradient-to-t from-orange-50 to-white">

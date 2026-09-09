@@ -5,7 +5,8 @@ import {
   CheckCircleIcon,
   PhoneIcon,
   ShieldCheckIcon,
-  StarIcon
+  StarIcon,
+  BoltIcon,
 } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,6 +14,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import ServiceAreas from '@/components/ServiceAreas';
+import OnlineDiagnosticCallout from '@/components/OnlineDiagnosticCallout';
 
 export default function TVRepairLanding() {
   const reviews = [
@@ -72,7 +74,7 @@ export default function TVRepairLanding() {
                 Don't haul your TV to a shop. We bring the repair shop to you. Professional diagnostics and repair for Samsung, LG, Sony, Vizio and all major brands, right in your living room.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center space-x-2 bg-primary hover:bg-primary-dark text-white font-bold py-4 px-8 rounded-xl transition-all duration-200 text-lg shadow-lg shadow-orange-200 transform hover:-translate-y-1"
@@ -80,6 +82,20 @@ export default function TVRepairLanding() {
                   <PhoneIcon className="w-6 h-6" />
                   <span>Get Free Quote</span>
                 </Link>
+                <Link
+                  href="/online-diagnostic"
+                  className="inline-flex items-center justify-center space-x-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-6 rounded-xl transition-all text-lg duration-200 shadow-lg shadow-slate-200 transform hover:-translate-y-1"
+                >
+                  <BoltIcon className="w-5 h-5 text-primary" />
+                  <span>Get $25 Online Diagnostic</span>
+                </Link>
+              </div>
+
+              <p className="text-sm text-slate-500 mb-8">
+                Not sure if it&apos;s worth fixing? Skip the $95+ house call &mdash; get an expert online verdict for $25 (credited toward your repair).
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <a
                   href="https://maps.app.goo.gl/vJJ5Rv3U1wcApo9N6?g_st=ic"
                   target="_blank"
@@ -279,7 +295,8 @@ export default function TVRepairLanding() {
       {/* Service Areas Component */}
       <ServiceAreas />
 
-
+      {/* $25 Online Diagnostic Callout */}
+      <OnlineDiagnosticCallout />
 
       {/* CTA / Contact Section */}
       <section id="contact" className="py-16 md:py-24 bg-gradient-to-t from-orange-50 to-white scroll-mt-20">

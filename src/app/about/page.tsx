@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ServiceAreas from '@/components/ServiceAreas';
 import ContactForm from '@/components/ContactForm';
+import OnlineDiagnosticCallout from '@/components/OnlineDiagnosticCallout';
 
 export default function AboutPage() {
   const benefits = [
@@ -171,6 +172,9 @@ export default function AboutPage() {
 
       {/* Service Areas */}
       <ServiceAreas />
+
+      {/* $25 Online Diagnostic Callout */}
+      <OnlineDiagnosticCallout />
 
       {/* Contact CTA */}
       <section className="py-16 md:py-24 bg-gradient-to-t from-orange-50 to-white">

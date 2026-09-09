@@ -5,6 +5,7 @@ import { HomeIcon, PhoneIcon, ClockIcon } from '@heroicons/react/24/solid';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
+import OnlineDiagnosticCallout from '@/components/OnlineDiagnosticCallout';
 
 const areas = [
   'Charlotte, NC',
@@ -184,6 +185,9 @@ export default function ServiceAreaPage() {
           </div>
         </div>
       </section>
+
+      {/* $25 Online Diagnostic Callout */}
+      <OnlineDiagnosticCallout />
 
       {/* Contact CTA */}
       <section className="py-16 md:py-24 bg-gradient-to-t from-orange-50 to-white">

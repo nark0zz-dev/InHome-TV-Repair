@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { CheckCircleIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, Bars3Icon, XMarkIcon, BoltIcon } from '@heroicons/react/24/solid';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,12 +36,13 @@ export default function Header() {
     { name: 'TV Installation', href: '/services/tv-installation', description: 'Wall mounting & setup' },
   ];
 
-  const navLinks: Array<{ name: string; href?: string; hasDropdown?: boolean }> = [
+  const navLinks: Array<{ name: string; href?: string; hasDropdown?: boolean; highlight?: boolean }> = [
     { name: 'Home', href: '/' },
     { name: 'Services', hasDropdown: true },
     { name: 'Service Area', href: '/service-area' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Online Diagnostic', href: '/online-diagnostic', highlight: true },
   ];
 
   const isActive = (href: string) => {
@@ -124,13 +125,16 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href!}
-                  className={`font-bold py-2 px-3 rounded-lg transition-colors ${
+                  className={`font-bold py-2 px-3 rounded-lg transition-colors inline-flex items-center space-x-1.5 ${
                     isActive(link.href!)
                       ? 'text-primary bg-primary/10'
-                      : 'text-slate-700 hover:text-primary hover:bg-slate-50'
+                      : link.highlight
+                        ? 'text-primary hover:bg-primary/10'
+                        : 'text-slate-700 hover:text-primary hover:bg-slate-50'
                   }`}
                 >
-                  {link.name}
+                  {link.highlight && <BoltIcon className="w-4 h-4" />}
+                  <span>{link.name}</span>
                 </Link>
               )
             )}
@@ -205,13 +209,16 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href!}
-                  className={`block py-2 px-3 rounded-lg font-bold transition-colors ${
+                  className={`flex items-center space-x-2 py-2 px-3 rounded-lg font-bold transition-colors ${
                     isActive(link.href!)
                       ? 'bg-primary/10 text-primary'
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-primary'
+                      : link.highlight
+                        ? 'text-primary hover:bg-primary/10'
+                        : 'text-slate-700 hover:bg-slate-50 hover:text-primary'
                   }`}
                 >
-                  {link.name}
+                  {link.highlight && <BoltIcon className="w-4 h-4" />}
+                  <span>{link.name}</span>
                 </Link>
               )
             )}

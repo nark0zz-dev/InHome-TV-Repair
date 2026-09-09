@@ -1,6 +1,7 @@
 'use client';
 
-import { PhoneIcon, ClockIcon, BoltIcon, EnvelopeIcon } from '@heroicons/react/24/solid';
+import { PhoneIcon, ClockIcon, BoltIcon, EnvelopeIcon, CurrencyDollarIcon, ArrowRightIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
@@ -26,14 +27,69 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Let's talk form */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="w-full px-4 max-w-4xl mx-auto sm:px-6">
-          <ContactForm 
+        <div className="w-full px-4 max-w-2xl mx-auto sm:px-6 lg:px-8">
+          <ContactForm
             serviceType="General Contact Form Submission"
-            heading="Request a Free Quote"
+            heading="Let's talk"
             subheading="Fill out the form below and we'll call you back within 30 minutes to discuss your TV repair needs."
+            showInfoPanel={false}
           />
+        </div>
+      </section>
+
+      {/* $25 Online Diagnostic pitch */}
+      <section className="py-12 md:py-16 bg-slate-50">
+        <div className="w-full px-4 max-w-2xl mx-auto sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-stone-800 via-stone-700 to-stone-800 rounded-3xl p-8 md:p-10 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center space-x-2 bg-primary/20 border border-primary/30 rounded-full py-2 px-4 mb-6">
+                <BoltIcon className="w-4 h-4 text-primary" />
+                <span className="text-sm font-bold text-primary-light uppercase tracking-wider">Only $25</span>
+              </div>
+
+              <h2 className="text-2xl md:text-3xl font-black mb-4 leading-tight">
+                Get an online verdict for $25
+              </h2>
+
+              <p className="text-stone-200 mb-6 leading-relaxed">
+                Get a diagnostic conclusion from a qualified specialist without leaving home.
+                Send us a photo or short video and get an expert verdict within 2 hours.
+              </p>
+
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center space-x-3">
+                  <div className="bg-primary/20 rounded-full p-1.5 flex-shrink-0">
+                    <CheckCircleIcon className="w-4 h-4 text-primary-light" />
+                  </div>
+                  <span className="text-stone-100 text-sm font-semibold">Verdict within 2 hours</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <div className="bg-primary/20 rounded-full p-1.5 flex-shrink-0">
+                    <CurrencyDollarIcon className="w-4 h-4 text-primary-light" />
+                  </div>
+                  <span className="text-stone-100 text-sm font-semibold">$25 credited toward your repair</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <div className="bg-primary/20 rounded-full p-1.5 flex-shrink-0">
+                    <BoltIcon className="w-4 h-4 text-primary-light" />
+                  </div>
+                  <span className="text-stone-100 text-sm font-semibold">No house call needed</span>
+                </li>
+              </ul>
+
+              <Link
+                href="/online-diagnostic"
+                className="inline-flex items-center justify-center space-x-2 bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-orange-900/40 transform hover:-translate-y-0.5"
+              >
+                <span>Start Your $25 Diagnostic</span>
+                <ArrowRightIcon className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

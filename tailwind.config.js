@@ -9,9 +9,9 @@ module.exports = {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#FF5722',
-                    dark: '#E64A19',
-                    light: '#FFAB91',
+                    DEFAULT: '#EA580C',
+                    dark: '#C2410C',
+                    light: '#FB923C',
                 },
                 secondary: {
                     DEFAULT: '#FFF3E0',

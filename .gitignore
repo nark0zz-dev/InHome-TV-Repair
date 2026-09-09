@@ -1,4 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+#ide
+AGENTS.md
 
 # dependencies
 /node_modules
@@ -46,3 +48,9 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# Database migration & setup scripts (local only)
+/scripts/migrate-*.sql
+/scripts/create-*.sql
+/scripts/run-migration.mjs
+/scripts/set-telegram-webhook.mjs

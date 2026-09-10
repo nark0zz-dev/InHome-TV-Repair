@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="inline-block">
-              <h3 className="text-2xl font-black mb-6 tracking-tight">inHome TV Repair</h3>
+              <h3 className="text-2xl font-black mb-6 tracking-tight">IN-HOME TV REPAIR Service</h3>
             </Link>
             <p className="text-slate-400 text-lg leading-relaxed max-w-sm">
               Professional In-Home TV Repair & Installation Services. We bring the tools and expertise to your doorstep.
@@ -91,7 +91,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
-          <p>&copy; {currentYear} inHome TV Repair. All rights reserved.</p>
+          <p>&copy; {currentYear} IN-HOME TV REPAIR Service. All rights reserved.</p>
         </div>
       </div>
     </footer>

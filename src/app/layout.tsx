@@ -13,20 +13,20 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://inhometvrepair.com'),
-  title: 'inHome TV Repair | TV Repair Charlotte NC | Same Day Service',
+  title: 'IN-HOME TV REPAIR Service | TV Repair Charlotte NC | Same Day Service',
   description: 'Professional in-home TV repair and installation services in Charlotte, NC. We come to you! No need to unplug or move your TV. Fix all brands - power issues, connectivity, smart TV setup, wall mounting. Same-day service available.',
-  authors: [{ name: 'inHome TV Repair' }],
+  authors: [{ name: 'IN-HOME TV REPAIR Service' }],
   robots: 'index, follow',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'inHome TV Repair | TV Repair Charlotte NC | Same Day Service',
+    title: 'IN-HOME TV REPAIR Service | TV Repair Charlotte NC | Same Day Service',
     description: 'Expert in-home TV repair and installation services in Charlotte, NC. We come directly to you! All brands serviced. Same-day appointments available. Licensed & insured technicians.',
     type: 'website',
     locale: 'en_US',
     url: 'https://inhometvrepair.com',
-    siteName: 'inHome TV Repair',
+    siteName: 'IN-HOME TV REPAIR Service',
     images: [
       {
         url: '/services/tv-repair.png', // Ensure this image exists or use a valid one
@@ -66,7 +66,7 @@ export default function RootLayout({
           {
             "@context": "https://schema.org",
             "@type": "ServiceBusiness",
-            "name": "inHome TV Repair",
+            "name": "IN-HOME TV REPAIR Service",
             "image": "https://inhometvrepair.com/services/tv-repair.png",
             "@id": "https://inhometvrepair.com#localbusiness",
             "url": "https://inhometvrepair.com",
@@ -233,8 +233,8 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "WebSite",
             "@id": "https://inhometvrepair.com#website",
-            "name": "inHome TV Repair",
-            "alternateName": "InHome TV Repair",
+            "name": "IN-HOME TV REPAIR Service",
+            "alternateName": "inHome TV Repair",
             "url": "https://inhometvrepair.com",
             "description": "Professional in-home TV repair and installation services in Charlotte, NC. We come to you for all TV repair needs.",
             "publisher": {

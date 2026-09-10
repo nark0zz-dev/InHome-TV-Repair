@@ -65,7 +65,7 @@ export default function RootLayout({
           {`
           {
             "@context": "https://schema.org",
-            "@type": "LocalBusiness",
+            "@type": "ServiceBusiness",
             "name": "inHome TV Repair",
             "image": "https://inhometvrepair.com/services/tv-repair.png",
             "@id": "https://inhometvrepair.com#localbusiness",
@@ -74,7 +74,6 @@ export default function RootLayout({
             "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "",
               "addressLocality": "Charlotte",
               "addressRegion": "NC",
               "postalCode": "28277",
@@ -82,8 +81,8 @@ export default function RootLayout({
             },
             "geo": {
               "@type": "GeoCoordinates",
-              "latitude": 35.0266, 
-              "longitude": -80.8494
+              "latitude": 35.2271,
+              "longitude": -80.8431
             },
             "openingHoursSpecification": [
               {
@@ -103,100 +102,84 @@ export default function RootLayout({
             "areaServed": [
               {
                 "@type": "City",
-                "name": "Charlotte",
+                "name": "Charlotte, NC",
                 "@id": "https://www.wikidata.org/wiki/Q16565"
               },
               {
                 "@type": "City",
-                "name": "Monroe"
+                "name": "Monroe, NC"
               },
               {
                 "@type": "City",
-                "name": "Concord"
+                "name": "Concord, NC"
               },
               {
                 "@type": "City",
-                "name": "Gastonia"
+                "name": "Gastonia, NC"
               },
               {
                 "@type": "City",
-                "name": "Matthews"
+                "name": "Matthews, NC"
               },
               {
                 "@type": "City",
-                "name": "Mt Holly"
+                "name": "Mt Holly, NC"
               },
               {
                 "@type": "City",
-                "name": "Fort Mill"
+                "name": "Fort Mill, SC"
               },
               {
                 "@type": "City",
-                "name": "Mint Hill"
+                "name": "Mint Hill, NC"
               },
               {
                 "@type": "City",
-                "name": "Pineville"
+                "name": "Pineville, NC"
               },
               {
                 "@type": "City",
-                "name": "Rock Hill"
+                "name": "Rock Hill, SC"
               },
               {
                 "@type": "City",
-                "name": "Stallings"
+                "name": "Stallings, NC"
               },
               {
                 "@type": "City",
-                "name": "Weddington"
+                "name": "Weddington, NC"
               },
               {
                 "@type": "City",
-                "name": "Indian Trail"
+                "name": "Indian Trail, NC"
               },
               {
                 "@type": "City",
-                "name": "Waxhaw"
+                "name": "Waxhaw, NC"
               },
               {
                 "@type": "City",
-                "name": "Wesley Chapel"
+                "name": "Wesley Chapel, NC"
               },
               {
                 "@type": "City",
-                "name": "Tega Cay"
+                "name": "Tega Cay, SC"
               },
               {
                 "@type": "City",
-                "name": "Mineral Springs"
+                "name": "Mineral Springs, NC"
               },
               {
                 "@type": "City",
-                "name": "Indian Land"
+                "name": "Indian Land, SC"
               },
               {
                 "@type": "City",
-                "name": "Huntersville"
+                "name": "Huntersville, NC"
               },
               {
                 "@type": "City",
-                "name": "Lake Norman"
-              },
-              {
-                "@type": "PostalCode",
-                "postalCode": "28173"
-              },
-              {
-                "@type": "PostalCode",
-                "postalCode": "29708"
-              },
-              {
-                "@type": "PostalCode",
-                "postalCode": "29707"
-              },
-              {
-                "@type": "PostalCode",
-                "postalCode": "28078"
+                "name": "Lake Norman, NC"
               }
             ],
             "serviceType": "TV Repair",

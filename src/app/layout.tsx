@@ -70,9 +70,6 @@ export default function RootLayout({
             "image": "https://inhometvrepair.com/services/tv-repair.png",
             "@id": "https://inhometvrepair.com#localbusiness",
             "url": "https://inhometvrepair.com",
-            "isPartOf": {
-              "@id": "https://inhometvrepair.com"
-            },
             "telephone": "+19809870005",
             "priceRange": "$$",
             "address": {
@@ -252,22 +249,14 @@ export default function RootLayout({
           {
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "@id": "https://inhometvrepair.com",
+            "@id": "https://inhometvrepair.com#website",
             "name": "inHome TV Repair",
-            "alternateName": "inHome TV Repair",
+            "alternateName": "InHome TV Repair",
             "url": "https://inhometvrepair.com",
-            "description": "Professional in-home TV repair and installation services. We come to you for all TV repair needs.",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://inhometvrepair.com/?q={search_term_string}"
-              },
-              "query-input": "required name=search_term_string"
-            },
-            "sameAs": [
-              "https://www.google.com/search?q=inHome+TV+Repair+Charlotte"
-            ]
+            "description": "Professional in-home TV repair and installation services in Charlotte, NC. We come to you for all TV repair needs.",
+            "publisher": {
+              "@id": "https://inhometvrepair.com#localbusiness"
+            }
           }
           `}
         </Script>

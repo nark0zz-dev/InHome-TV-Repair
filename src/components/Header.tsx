@@ -72,10 +72,9 @@ export default function Header() {
             </div>
             <div>
               <div className="text-xl md:text-2xl font-black text-slate-800 tracking-tight leading-none">
-                inHome
-              </div>
-              <div className="text-sm md:text-base font-black text-slate-800 tracking-tight leading-none mt-0.5 uppercase">
-                TV Repair
+                <span className="sr-only">inHome TV Repair</span>
+                <span aria-hidden="true">inHome</span>
+                <span aria-hidden="true" className="block text-sm md:text-base font-black text-slate-800 tracking-tight leading-none mt-0.5 uppercase">TV Repair</span>
               </div>
             </div>
           </Link>
